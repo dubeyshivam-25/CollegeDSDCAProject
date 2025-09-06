@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GROUP 1 (1-12)</title>
+    <style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f4f6f8;
+        color: #333;
+        margin: 0;
+        padding: 40px;
+    }
+
+    h1 {
+        text-align: center;
+        color: #2c3e50;
+        margin-bottom: 40px;
+    }
+
+    form {
+        max-width: 500px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+        color: #34495e;
+    }
+
+    input[type="text"],
+    input[type="number"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        box-sizing: border-box;
+        transition: border-color 0.3s;
+    }
+
+    input:focus {
+        border-color: #3498db;
+        outline: none;
+    }
+
+    button {
+        background-color: #3498db;
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s;
+    }
+
+    button:hover {
+        background-color: #2980b9;
+    }
+
+    .result {
+        max-width: 600px;
+        margin: 40px auto;
+        background-color: #ecf0f1;
+        padding: 25px;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    .result h2 {
+        color: #2c3e50;
+        margin-bottom: 20px;
+    }
+
+    .result p {
+        font-size: 16px;
+        margin: 10px 0;
+    }
+
+    strong {
+        color: #2c3e50;
+    }
+
+    @media (max-width: 600px) {
+        body {
+            padding: 20px;
+        }
+
+        form, .result {
+            padding: 20px;
+        }
+
+        button {
+            width: 100%;
+        }
+    }
+</style>
+
+
+</head>
+<body>
+    <h2>DSDCA Mini Project,GROUP (1-12)</h2>
+    <div style="display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; margin-bottom: 40px;">
+    <!-- Theory Column -->
+    <div style="flex: 1 1 400px; background-color: #ffffff; padding: 25px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);">
+        <h2 style="color: #4083c5ff;"> What is Hamming Code?</h2>
+        <p style="font-size: 16px; color: #34495e;">
+            Hamming Code is an error-correcting technique invented by Richard Hamming. It adds extra bits called parity bits to a binary message to detect and correct single-bit errors. These parity bits are placed at positions that are powers of two and are calculated based on specific combinations of data bits.
+        </p>
+        <p style="font-size: 16px; color: #34495e;">
+            When a message is received, the parity bits are recalculated and compared with the received ones. If there's a mismatch, the system identifies the exact bit that was corrupted using binary indexing. This allows the receiver to correct the error and recover the original message accurately.
+        </p>
+        <img src="{{ url_for('static', filename='hamming code.png') }}" 
+     alt="Hamming Code Diagram" 
+     style="width: 100%; height: auto; border-radius: 10px; margin-bottom: 20px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
+
+
+
+
+
+    </div>
+
+    <!-- Process Column -->
+     <div style="flex: 1 1 400px; background-color: #ffffff; padding: 25px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);">
+    <h2 style="color: #e52c2cff; margin-bottom: 20px;"> PRACTICAL DETECTION</h2>
+
+    <form method="POST">
+        <label style="display: block; margin-bottom: 8px; font-weight: bold; color: #34495e;">Binary Message:</label>
+        <input type="text" name="message" required style="width: 100%; padding: 10px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; transition: border-color 0.3s;">
+        
+        <label style="display: block; margin-bottom: 8px; font-weight: bold; color: #34495e;">Error Position (optional):</label>
+        <input type="number" name="error_pos" min="1" style="width: 100%; padding: 10px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; transition: border-color 0.3s;">
+        
+        <button type="submit" style="background-color: #3498db; color: white; border: none; padding: 12px 24px; border-radius: 6px; cursor: pointer; font-size: 16px; transition: background-color 0.3s;">Process</button>
+    </form>
+
+    {% if result %}
+    <div class="result" style="margin-top: 30px; background-color: #ecf0f1; padding: 25px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);">
+        <h2 style="color: #2c3e50;">Results:</h2>
+        <p><strong>Original Message:</strong> {{ result.original }}</p>
+        <p><strong>Encoded Message:</strong> {{ result.encoded }}</p>
+        <p><strong>Corrupted Message:</strong> {{ result.corrupted }}</p>
+        <p><strong>Corrected Message:</strong> {{ result.corrected }}</p>
+        <p><strong>Error Detected at Position:</strong> {{ result.error_position }}</p>
+    </div>
+    {% endif %}
+</div>
+
+     
+
+</div>
+
+
+</body>
+</html>
